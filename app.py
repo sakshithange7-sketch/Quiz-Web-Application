@@ -33,3 +33,7 @@ def mcq_question():
 # Run app
 if __name__ == '__main__':
     app.run(debug=True)
+    class Result(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    selected_answer = db.Column(db.String(10))
+    is_correct = db.Column(db.Boolean)
