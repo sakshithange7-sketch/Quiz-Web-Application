@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>MCQ Question</h2>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+
+    {{ form.answer.label }} <br>
+    {{ form.answer() }} <br><br>
+
+    {{ form.submit() }}
+</form>
+
+{% endblock %}
