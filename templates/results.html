@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Results</h2>
+
+<table border="1">
+<tr>
+    <th>ID</th>
+    <th>Answer</th>
+    <th>Correct</th>
+</tr>
+
+{% for r in results %}
+<tr>
+    <td>{{ r.id }}</td>
+    <td>{{ r.selected_answer }}</td>
+    <td>{{ r.is_correct }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</body>
+</html>
