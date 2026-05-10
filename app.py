@@ -4,6 +4,7 @@ from forms import TextQuestionForm, MCQForm
 
 app = Flask(__name__)
 
+# Config
 app.config['SECRET_KEY'] = 'secretkey'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quiz.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -18,24 +19,23 @@ class Result(db.Model):
     selected_answer = db.Column(db.String(50))
     is_correct = db.Column(db.Boolean)
 
-
 # ======================
 # Home
 # ======================
 @app.route('/')
 def home():
-    return "Quiz Running 🚀"
-
+    return "Quiz App Running 🚀"
 
 # ======================
 # TEXT QUESTION
 # ======================
 @app.route('/text', methods=['GET', 'POST'])
 def text_question():
+
     form = TextQuestionForm()
-    result = None
 
     if form.validate_on_submit():
+
         answer = form.question.data
 
         new_result = Result(
@@ -46,20 +46,22 @@ def text_question():
         db.session.add(new_result)
         db.session.commit()
 
-        result = f"You answered: {answer}"
+        message = f"Your Answer: {answer} (Recorded Successfully)"
 
-    return render_template('text.html', form=form, result=result)
+        return render_template('confirmation.html', message=message)
 
+    return render_template('text.html', form=form)
 
 # ======================
 # MCQ QUESTION
 # ======================
 @app.route('/mcq', methods=['GET', 'POST'])
 def mcq_question():
+
     form = MCQForm()
-    result = None
 
     if form.validate_on_submit():
+
         selected = form.answer.data
         correct = (selected == 'A')
 
@@ -71,11 +73,13 @@ def mcq_question():
         db.session.add(new_result)
         db.session.commit()
 
-        result = f"You selected: {selected} | {'Correct' if correct else 'Wrong'}"
+        score = 1 if correct else 0
 
-    return render_template('mcq.html', form=form, result=result)
+        message = f"Answer: {selected} | {'Correct' if correct else 'Wrong'} | Score: {score}/1"
 
+        return render_template('confirmation.html', message=message)
 
+    return render_template('mcq.html', form=form)
 # ======================
 # RESULTS PAGE
 # ======================
@@ -84,11 +88,11 @@ def results():
     all_results = Result.query.all()
     return render_template('results.html', results=all_results)
 
-
 # ======================
 # RUN APP
 # ======================
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
+
     app.run(debug=True)

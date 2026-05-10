@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>MCQ Question</title>
+</head>
 <body>
 
 <h2>MCQ Question</h2>
@@ -7,15 +10,17 @@
 <form method="POST">
     {{ form.hidden_tag() }}
 
-    {{ form.answer.label }} <br>
-    {{ form.answer() }} <br><br>
+    <p>{{ form.answer.label }}</p>
 
-    {{ form.submit() }}
+    {% for option in form.answer %}
+        <p>
+            {{ option() }}
+            {{ option.label.text }}
+        </p>
+    {% endfor %}
+
+    <p>{{ form.submit() }}</p>
 </form>
-
-{% if result %}
-    <p>{{ result }}</p>
-{% endif %}
 
 </body>
 </html>

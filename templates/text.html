@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>Text Question</title>
+</head>
 <body>
 
 <h2>Text Question</h2>
@@ -7,15 +10,13 @@
 <form method="POST">
     {{ form.hidden_tag() }}
 
-    {{ form.question.label }} <br>
-    {{ form.question() }} <br><br>
+    <p>
+        {{ form.question.label }}<br>
+        {{ form.question() }}
+    </p>
 
-    {{ form.submit() }}
+    <p>{{ form.submit() }}</p>
 </form>
-
-{% if result %}
-    <p>{{ result }}</p>
-{% endif %}
 
 </body>
 </html>
