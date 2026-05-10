@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h2>MCQ Quiz</h2>
+<h2>MCQ Quiz Form</h2>
 
 <div class="timer">
     Time Left: <span id="time">30</span> sec
@@ -12,18 +12,22 @@
 
     {{ form.hidden_tag() }}
 
-    <p>{{ form.answer.label }}</p>
+    <label>
+        Choose the Correct Option
+    </label>
 
     {% for option in form.answer %}
-        <p>
+
+        <div class="option">
+
             {{ option() }}
             {{ option.label.text }}
-        </p>
+
+        </div>
+
     {% endfor %}
 
-    <p>
-        {{ form.submit(class="btn") }}
-    </p>
+    {{ form.submit(class="btn") }}
 
 </form>
 
@@ -36,13 +40,15 @@ function validateMCQ(){
     let checked = false;
 
     for(let i=0; i<options.length; i++){
+
         if(options[i].checked){
             checked = true;
         }
     }
 
     if(!checked){
-        alert("Please select an option!");
+
+        alert("Please select an option.");
         return false;
     }
 
@@ -58,8 +64,11 @@ let timer = setInterval(function(){
     timeLeft--;
 
     if(timeLeft < 0){
+
         clearInterval(timer);
+
         alert("Time is up!");
+
         window.location.reload();
     }
 

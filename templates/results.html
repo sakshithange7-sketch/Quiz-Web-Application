@@ -6,27 +6,39 @@
 
 <table>
 
-<tr>
-    <th>ID</th>
-    <th>Selected Answer</th>
-    <th>Correct</th>
-</tr>
+    <tr>
 
-{% for r in results %}
+        <th>ID</th>
+        <th>Selected Answer</th>
+        <th>Status</th>
 
-<tr>
-    <td>{{ r.id }}</td>
-    <td>{{ r.selected_answer }}</td>
-    <td>
-        {% if r.is_correct %}
-            ✅ Correct
-        {% else %}
-            ❌ Wrong
-        {% endif %}
-    </td>
-</tr>
+    </tr>
 
-{% endfor %}
+    {% for r in results %}
+
+    <tr>
+
+        <td>{{ r.id }}</td>
+
+        <td>{{ r.selected_answer }}</td>
+
+        <td>
+
+            {% if r.is_correct %}
+
+                ✅ Correct
+
+            {% else %}
+
+                ❌ Wrong
+
+            {% endif %}
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
 
 </table>
 

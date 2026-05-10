@@ -2,20 +2,19 @@
 
 {% block content %}
 
-<h2>Text Question</h2>
+<h2>Text Question Form</h2>
 
 <form method="POST" onsubmit="return validateTextForm()">
 
     {{ form.hidden_tag() }}
 
-    <p>
-        {{ form.question.label }}
-        {{ form.question(id="textInput") }}
-    </p>
+    <label for="textInput">
+        Enter Your Answer
+    </label>
 
-    <p>
-        {{ form.submit(class="btn") }}
-    </p>
+    {{ form.question(id="textInput", placeholder="Type your answer here...") }}
+
+    {{ form.submit(class="btn") }}
 
 </form>
 
@@ -25,8 +24,9 @@ function validateTextForm(){
 
     let text = document.getElementById("textInput").value;
 
-    if(text.trim() == ""){
-        alert("Text field cannot be empty!");
+    if(text.trim() === ""){
+
+        alert("Please enter your answer.");
         return false;
     }
 
