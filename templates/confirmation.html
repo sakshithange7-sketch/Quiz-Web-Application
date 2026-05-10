@@ -1,23 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Result</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-<h2>Quiz Result</h2>
+{% block content %}
 
-{% if "Correct" in message %}
-    <h3 style="color: green;">✅ {{ message }}</h3>
-{% else %}
-    <h3 style="color: red;">❌ {{ message }}</h3>
-{% endif %}
+<h2>Submission Successful</h2>
 
-<hr>
+<p class="success">
+    {{ message }}
+</p>
 
-<a href="/mcq">Try MCQ Again</a><br><br>
-<a href="/text">Try Text Question</a><br><br>
-<a href="/results">View All Results</a>
+<center>
+    <a href="/results">
+        <button class="btn">View Results</button>
+    </a>
+</center>
 
-</body>
-</html>
+{% endblock %}

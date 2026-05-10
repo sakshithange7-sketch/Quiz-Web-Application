@@ -1,13 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>MCQ Question</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-<h2>MCQ Question</h2>
+{% block content %}
 
-<form method="POST">
+<h2>MCQ Quiz</h2>
+
+<div class="timer">
+    Time Left: <span id="time">30</span> sec
+</div>
+
+<form method="POST" onsubmit="return validateMCQ()">
+
     {{ form.hidden_tag() }}
 
     <p>{{ form.answer.label }}</p>
@@ -19,8 +21,50 @@
         </p>
     {% endfor %}
 
-    <p>{{ form.submit() }}</p>
+    <p>
+        {{ form.submit(class="btn") }}
+    </p>
+
 </form>
 
-</body>
-</html>
+<script>
+
+function validateMCQ(){
+
+    let options = document.getElementsByName("answer");
+
+    let checked = false;
+
+    for(let i=0; i<options.length; i++){
+        if(options[i].checked){
+            checked = true;
+        }
+    }
+
+    if(!checked){
+        alert("Please select an option!");
+        return false;
+    }
+
+    return true;
+}
+
+let timeLeft = 30;
+
+let timer = setInterval(function(){
+
+    document.getElementById("time").innerHTML = timeLeft;
+
+    timeLeft--;
+
+    if(timeLeft < 0){
+        clearInterval(timer);
+        alert("Time is up!");
+        window.location.reload();
+    }
+
+},1000);
+
+</script>
+
+{% endblock %}

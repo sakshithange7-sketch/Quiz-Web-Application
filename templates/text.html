@@ -1,22 +1,38 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Text Question</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
 
 <h2>Text Question</h2>
 
-<form method="POST">
+<form method="POST" onsubmit="return validateTextForm()">
+
     {{ form.hidden_tag() }}
 
     <p>
-        {{ form.question.label }}<br>
-        {{ form.question() }}
+        {{ form.question.label }}
+        {{ form.question(id="textInput") }}
     </p>
 
-    <p>{{ form.submit() }}</p>
+    <p>
+        {{ form.submit(class="btn") }}
+    </p>
+
 </form>
 
-</body>
-</html>
+<script>
+
+function validateTextForm(){
+
+    let text = document.getElementById("textInput").value;
+
+    if(text.trim() == ""){
+        alert("Text field cannot be empty!");
+        return false;
+    }
+
+    return true;
+}
+
+</script>
+
+{% endblock %}

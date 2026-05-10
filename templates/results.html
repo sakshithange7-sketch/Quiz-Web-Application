@@ -1,20 +1,33 @@
-<table border="1">
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Quiz Results</h2>
+
+<table>
+
 <tr>
     <th>ID</th>
-    <th>Answer</th>
-    <th>Status</th>
+    <th>Selected Answer</th>
+    <th>Correct</th>
 </tr>
 
 {% for r in results %}
+
 <tr>
     <td>{{ r.id }}</td>
     <td>{{ r.selected_answer }}</td>
-
-    {% if r.is_correct %}
-        <td style="color: green;">Correct</td>
-    {% else %}
-        <td style="color: red;">Wrong</td>
-    {% endif %}
+    <td>
+        {% if r.is_correct %}
+            ✅ Correct
+        {% else %}
+            ❌ Wrong
+        {% endif %}
+    </td>
 </tr>
+
 {% endfor %}
+
 </table>
+
+{% endblock %}
